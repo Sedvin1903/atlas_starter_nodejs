@@ -6,8 +6,7 @@ async function run() {
   // Altas cluster specifics. Be sure it includes
   // a valid username and password! Note that in a production environment,
   // you do not want to store your password in plain-text here.
-  const uri =
-    "mongodb+srv://<user>:<password>@<cluster-url>?retryWrites=true&w=majority";
+  const uri ="mongodb+srv://vcai:votechain%402023@clustervcai.rdtq9yy.mongodb.net?retryWrites=true&w=majority";
 
   // The MongoClient is the object that references the connection to our
   // datastore (Atlas, for example)
@@ -21,8 +20,8 @@ async function run() {
   // Provide the name of the database and collection you want to use.
   // If the database and/or collection do not exist, the driver and Atlas
   // will create them automatically when you first write data.
-  const dbName = "myDatabase";
-  const collectionName = "recipes";
+  const dbName = "react-login-tut";
+  const collectionName = "collection";
 
   // Create references to the database and collection in order to run
   // operations on them.
@@ -39,52 +38,54 @@ async function run() {
 
   const recipes = [
     {
-      name: "elotes",
-      ingredients: [
-        "corn",
-        "mayonnaise",
-        "cotija cheese",
-        "sour cream",
-        "lime",
-      ],
-      prepTimeInMinutes: 35,
+      name:
+      "Franregi",
+      email:
+      "franregi@gmail.com",
+      password:
+      "f123",
+      cpass:
+      "f123"
     },
     {
-      name: "loco moco",
-      ingredients: [
-        "ground beef",
-        "butter",
-        "onion",
-        "egg",
-        "bread bun",
-        "mushrooms",
-      ],
-      prepTimeInMinutes: 54,
+      name:
+      "Franregit",
+      email:
+      "franregit@gmail.com",
+      password:
+      "f1234",
+      cpass:
+      "f1234"
     },
     {
-      name: "patatas bravas",
-      ingredients: [
-        "potato",
-        "tomato",
-        "olive oil",
-        "onion",
-        "garlic",
-        "paprika",
-      ],
-      prepTimeInMinutes: 80,
+      name:
+      "Jesed",
+      email:
+      "admin@gmail.com",
+      password:
+      "admin123",
+      cpass:
+      "admin123"
     },
     {
-      name: "fried rice",
-      ingredients: [
-        "rice",
-        "soy sauce",
-        "egg",
-        "onion",
-        "pea",
-        "carrot",
-        "sesame oil",
-      ],
-      prepTimeInMinutes: 40,
+      name:
+      "Franregiy",
+      email:
+      "franregiy@gmail.com",
+      password:
+      "f1235",
+      cpass:
+      "f1235"
+    },
+    {
+      name:
+      "Franregiu",
+      email:
+      "franregiu@gmail.com",
+      password:
+      "f1236",
+      cpass:
+      "f1236"
     },
   ];
 
@@ -104,12 +105,12 @@ async function run() {
    * filters, and is used here to show its most basic use.
    */
 
-  const findQuery = { prepTimeInMinutes: { $lt: 45 } };
+  const findQuery = { email: "franregiu@gmail.com"  };
 
   try {
     const cursor = await collection.find(findQuery).sort({ name: 1 });
     await cursor.forEach(recipe => {
-      console.log(`${recipe.name} has ${recipe.ingredients.length} ingredients and takes ${recipe.prepTimeInMinutes} minutes to make.`);
+      console.log(`${recipe.name} has email ${recipe.email}  and uses ${recipe.password} minutes to make.`);
     });
     // add a linebreak
     console.log();
@@ -119,14 +120,15 @@ async function run() {
 
   // We can also find a single document. Let's find the first document
   // that has the string "potato" in the ingredients list.
-  const findOneQuery = { ingredients: "potato" };
+  const e = "admin@gmail.com"
+  const findOneQuery = { email: e};
 
   try {
     const findOneResult = await collection.findOne(findOneQuery);
     if (findOneResult === null) {
       console.log("Couldn't find any recipes that contain 'potato' as an ingredient.\n");
     } else {
-      console.log(`Found a recipe with 'potato' as an ingredient:\n${JSON.stringify(findOneResult)}\n`);
+      console.log(`Found a account with ${e} as an ingredient:\n${JSON.stringify(findOneResult)}\n`);
     }
   } catch (err) {
     console.error(`Something went wrong trying to find one document: ${err}\n`);
@@ -140,7 +142,7 @@ async function run() {
    * Here we update the PrepTimeInMinutes value on the document we
    * just found.
    */
-  const updateDoc = { $set: { prepTimeInMinutes: 72 } };
+  const updateDoc = { $set: { name : "Jesedfrv" } };
 
   // The following updateOptions document specifies that we want the *updated*
   // document to be returned. By default, we get the document as it was *before*
@@ -168,7 +170,7 @@ async function run() {
    */
 
 
-  const deleteQuery = { name: { $in: ["elotes", "fried rice"] } };
+  const deleteQuery = { name: { $in: ["Franregiy"] } };
   try {
     const deleteResult = await collection.deleteMany(deleteQuery);
     console.log(`Deleted ${deleteResult.deletedCount} documents\n`);
